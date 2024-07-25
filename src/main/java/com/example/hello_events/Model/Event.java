@@ -17,8 +17,8 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long eventsId;
+
     private String title;
     private String description;
     private String location;
@@ -31,4 +31,7 @@ public class Event {
             (mappedBy = "event" , cascade = CascadeType.ALL)
             private List<Booking> bookings;
 
+    @OneToMany
+            (mappedBy = "event" , cascade = CascadeType.ALL)
+    private List<Ticket> tickets;
 }

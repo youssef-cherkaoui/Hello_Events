@@ -17,8 +17,14 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingID;
+    @Column(updatable = false)
     private LocalDateTime bookingDate;
     private int ticketsNumber;
+
+    @PrePersist
+    protected void onCreate() {
+        bookingDate = LocalDateTime.now();
+    }
 
     @ManyToOne
     @JoinColumn(name = "user_id")
