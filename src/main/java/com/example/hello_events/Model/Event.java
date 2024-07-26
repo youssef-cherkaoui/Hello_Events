@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Event {
     private String title;
     private String description;
     private String location;
-    private LocalDate date;
+    private Date date;
     private String category;
     private Double price;
     private int availableTickets;

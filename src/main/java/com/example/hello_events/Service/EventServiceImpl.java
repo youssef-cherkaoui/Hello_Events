@@ -1,6 +1,7 @@
 package com.example.hello_events.Service;
 
-import com.example.hello_events.Model.Event;
+import com.example.hello_events.Model.Dto.EventDTO;
+import com.example.hello_events.Model.mapper.EventMapper;
 import com.example.hello_events.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,33 +12,36 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
 
     @Autowired
-    private EventRepository eventRepository ;
+    private EventRepository eventRepository;
+    @Autowired
+    private EventMapper eventMapper;
+
 
     @Override
-    public Event createEvent(Event event){
-        return eventRepository.save(event);
+    public EventDTO createEvent(EventDTO event) {
+        return eventMapper.toDTO(eventRepository.save(eventMapper.toEntity(event)));
     }
 
     @Override
-    public List<Event> getAllEvents(){
-        return eventRepository.findAll();
+    public List<EventDTO> getAllEvents() {
+        return eventMapper.toDTOList(eventRepository.findAll());
     }
 
     @Override
-    public Event editEvent(Event event, Long id){
+    public EventDTO editEvent(EventDTO event, Long id) {
         eventRepository.findById(id);
 
-        Event editedEvent = new Event();
+        EventDTO editedEvent = new EventDTO();
         editedEvent.setEventsId(id);
         editedEvent.setDate(event.getDate());
         editedEvent.setCategory(event.getCategory());
-        editedEvent.setBookings(event.getBookings());
+        editedEvent.setBooking(event.getBooking());
         editedEvent.setDescription(event.getDescription());
         editedEvent.setPrice(event.getPrice());
         editedEvent.setLocation(event.getLocation());
         editedEvent.setAvailableTickets(event.getAvailableTickets());
 
-        return eventRepository.save(editedEvent);
+        return eventMapper.toDTO(eventRepository.save(eventMapper.toEntity(editedEvent)))  ;
     }
 
     @Override
