@@ -1,6 +1,8 @@
 package com.example.hello_events.Model.Dto;
 
 
+import com.example.hello_events.Model.Booking;
+import com.example.hello_events.Model.Ticket;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -17,6 +19,6 @@ public class EventDTO {
     private String category;
     private Double price;
     private int availableTickets;
-    private List<BookingDTO> bookingDTOS;
-    private List<TicketDTO> ticketDTOS;
+    private List<Booking> booking;
+    private List<Ticket> ticket;
 }

@@ -2,8 +2,10 @@
 package com.example.hello_events.Controller;
 
 
+import com.example.hello_events.Model.Dto.EventDTO;
 import com.example.hello_events.Model.Event;
 import com.example.hello_events.Service.EventService;
+import com.example.hello_events.Service.EventServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,20 +17,20 @@ import java.util.List;
 public class EventController {
     
     @Autowired
-    private EventService eventService ;
+    private EventServiceImpl eventService ;
 
     @PostMapping("/create")
-    public Event createEvent(@RequestBody Event event){
+    public EventDTO createEvent(@RequestBody EventDTO event){
         return eventService.createEvent(event);
     }
 
     @GetMapping("/AllEvents")
-    public List<Event> getAllEvents(){
+    public List<EventDTO> getAllEvents(){
         return eventService.getAllEvents();
     }
 
     @PutMapping
-    public Event updateEvent(@RequestBody Event event, @PathVariable Long id){
+    public EventDTO updateEvent(@RequestBody EventDTO event, @PathVariable Long id){
         return  eventService.editEvent(event, id);
     }
 
